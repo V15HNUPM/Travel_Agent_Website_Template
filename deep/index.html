@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabad Travel Agent Portal | Premium Booking Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Prata&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'prata': ['Prata', 'serif'],
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'hyderabad-saffron': '#FF6B35',
+                        'hyderabad-indigo': '#004E89',
+                        'hyderabad-teal': '#00A5E0',
+                        'hyderabad-sand': '#F7C59F',
+                        'hyderabad-mint': '#A9D8B8',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #004E89 0%, #00A5E0 100%);
+        }
+        .hero-pattern {
+            background: linear-gradient(rgba(0, 78, 137, 0.85), rgba(0, 78, 137, 0.85)), 
+                        url('https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .hyderabad-icon {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #FF6B35;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="font-montserrat bg-gray-50 overflow-x-hidden">
+    <!-- Floating background elements -->
+    <div class="floating-shape top-20 left-10 w-64 h-64 rounded-full bg-hyderabad-saffron mix-blend-multiply animation-float"></div>
+    <div class="floating-shape top-1/3 right-20 w-48 h-48 rounded-full bg-hyderabad-teal mix-blend-multiply animation-float" style="animation-delay: 2s;"></div>
+    <div class="floating-shape bottom-40 left-1/4 w-32 h-32 rounded-full bg-hyderabad-mint mix-blend-multiply animation-float" style="animation-delay: 4s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-white/90 shadow-sm">
+        <div class="max-w-8xl mx-auto px-6">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="hyderabad-icon p-2 rounded-lg bg-gradient-to-br from-hyderabad-indigo to-hyderabad-teal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-hyderabad-indigo font-prata">Hyderabad<span class="text-hyderabad-saffron">Tours</span></span>
+                </div>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-hyderabad-indigo px-3 py-2 text-lg font-medium relative">Home</a>
+                    <a href="#" class="nav-link text-gray-600 px-3 py-2 text-lg font-medium relative">Tours</a>
+                    <a href="#" class="nav-link text-gray-600 px-3 py-2 text-lg font-medium relative">Stays</a>
+                    <a href="#" class="nav-link text-gray-600 px-3 py-2 text-lg font-medium relative">Agents</a>
+                    <a href="#" class="nav-link text-gray-600 px-3 py-2 text-lg font-medium relative">About</a>
+                    <a href="login.html" class="ml-4 px-6 py-2.5 rounded-full bg-gradient-to-r from-hyderabad-saffron to-orange-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        Agent Login <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="lg:hidden">
+                    <button class="text-hyderabad-indigo focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern min-h-screen flex items-center pt-20 pb-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-6xl font-prata font-bold text-white leading-tight">
+                        <span class="block">Elevate Your</span>
+                        <span class="block text-hyderabad-saffron mt-3">Hyderabad Experience</span>
+                    </h1>
+                    <p class="mt-6 text-xl text-gray-100 max-w-lg mx-auto lg:mx-0">
+                        The exclusive booking platform for discerning travel agents specializing in Hyderabad's rich heritage and luxury accommodations.
+                    </p>
+                    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="login.html" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-hyderabad-saffron to-orange-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center">
+                            Agent Portal <i class="fas fa-lock-open ml-2"></i>
+                        </a>
+                        <a href="#" class="px-8 py-3.5 rounded-full bg-white text-hyderabad-indigo font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center">
+                            Explore Features <i class="fas fa-chevron-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative hidden lg:block">
+                    <div class="absolute -top-10 -left-10 w-64 h-64 bg-hyderabad-saffron rounded-2xl opacity-20"></div>
+                    <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-hyderabad-teal rounded-2xl opacity-20"></div>
+                    <div class="relative bg-white/20 backdrop-blur-md rounded-2xl overflow-hidden border border-white/30 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1581852017103-68e8115e1e47?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Charminar" class="w-full h-auto object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <h3 class="text-white font-prata text-xl">Exclusive Access</h3>
+                            <p class="text-gray-200 text-sm mt-1">Private tours unavailable to the public</p>
+                        </div>
+                        <div class="absolute top-6 right-6 bg-hyderabad-saffron text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                            AGENT EXCLUSIVE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-24 bg-gray-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-block px-4 py-1.5 rounded-full bg-hyderabad-mint/30 text-hyderabad-indigo font-semibold text-sm mb-4">AGENT BENEFITS</span>
+                <h2 class="text-4xl font-prata font-bold text-hyderabad-indigo">
+                    Designed for <span class="text-hyderabad-saffron">Travel Professionals</span>
+                </h2>
+                <p class="mt-4 text-lg text-gray-600">
+                    Powerful tools and exclusive benefits crafted specifically for Hyderabad travel specialists.
+                </p>
+            </div>
+
+            <div class="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100 relative overflow-hidden z-10">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-hyderabad-saffron rounded-full opacity-5"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-hyderabad-indigo to-hyderabad-teal flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-key text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Priority Access</h3>
+                    <p class="text-gray-600">
+                        Get first dibs on premium Hyderabad properties and experiences before they're released to the public.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <a href="#" class="text-hyderabad-saffron font-semibold text-sm flex items-center">
+                            Learn more <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100 relative overflow-hidden z-10">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-hyderabad-teal rounded-full opacity-5"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-hyderabad-saffron to-orange-500 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-percentage text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Enhanced Commissions</h3>
+                    <p class="text-gray-600">
+                        Higher commission rates with transparent tracking and timely payouts for all bookings.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <a href="#" class="text-hyderabad-saffron font-semibold text-sm flex items-center">
+                            Learn more <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100 relative overflow-hidden z-10">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-hyderabad-mint rounded-full opacity-5"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Instant Confirmations</h3>
+                    <p class="text-gray-600">
+                        Real-time booking confirmations with no waiting period for your high-value clients.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <a href="#" class="text-hyderabad-saffron font-semibold text-sm flex items-center">
+                            Learn more <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100 relative overflow-hidden z-10">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-hyderabad-indigo rounded-full opacity-5"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Group Tools</h3>
+                    <p class="text-gray-600">
+                        Special dashboard for managing group bookings and corporate travel arrangements.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <a href="#" class="text-hyderabad-saffron font-semibold text-sm flex items-center">
+                            Learn more <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100 relative overflow-hidden z-10">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-hyderabad-sand rounded-full opacity-5"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-map-marked-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Local Intelligence</h3>
+                    <p class="text-gray-600">
+                        Hyderabad-focused market insights, seasonal packages, and local expert connections.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <a href="#" class="text-hyderabad-saffron font-semibold text-sm flex items-center">
+                            Learn more <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100 relative overflow-hidden z-10">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-hyderabad-saffron rounded-full opacity-5"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-headset text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Dedicated Support</h3>
+                    <p class="text-gray-600">
+                        24/7 priority support line with Hyderabad-based travel specialists.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <a href="#" class="text-hyderabad-saffron font-semibold text-sm flex items-center">
+                            Learn more <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hyderabad Specialties -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="inline-block px-4 py-1.5 rounded-full bg-hyderabad-sand/30 text-hyderabad-indigo font-semibold text-sm mb-4">HYDERABAD EXCLUSIVES</span>
+                <h2 class="text-4xl font-prata font-bold text-hyderabad-indigo">
+                    Curated <span class="text-hyderabad-saffron">Pearl City</span> Experiences
+                </h2>
+                <p class="mt-4 text-lg text-gray-600">
+                    Our signature offerings that set your travel packages apart
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Experience 1 -->
+                <div class="card-hover group relative rounded-xl overflow-hidden shadow-lg h-96">
+                    <img src="https://images.unsplash.com/photo-1581852017103-68e8115e1e47?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Heritage Walk" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-hyderabad-saffron text-white text-xs font-bold mb-3">AGENT FAVORITE</span>
+                        <h3 class="text-2xl font-prata font-bold text-white mb-2">Old City Heritage Walks</h3>
+                        <p class="text-gray-200 mb-4">Private guided tours through Charminar's hidden gems</p>
+                        <div class="flex items-center text-white">
+                            <span class="text-sm font-medium">From ₹5,800/person</span>
+                            <button class="ml-auto w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-hyderabad-saffron transition">
+                                <i class="fas fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="card-hover group relative rounded-xl overflow-hidden shadow-lg h-96">
+                    <img src="https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biryani" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-hyderabad-teal text-white text-xs font-bold mb-3">CULINARY</span>
+                        <h3 class="text-2xl font-prata font-bold text-white mb-2">Royal Hyderabadi Dining</h3>
+                        <p class="text-gray-200 mb-4">Private cooking classes with legendary biryani chefs</p>
+                        <div class="flex items-center text-white">
+                            <span class="text-sm font-medium">From ₹12,500/experience</span>
+                            <button class="ml-auto w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-hyderabad-saffron transition">
+                                <i class="fas fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="card-hover group relative rounded-xl overflow-hidden shadow-lg h-96">
+                    <img src="https://images.unsplash.com/photo-1598940603846-a1edd0ef2574?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Golconda" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-hyderabad-indigo text-white text-xs font-bold mb-3">EXCLUSIVE ACCESS</span>
+                        <h3 class="text-2xl font-prata font-bold text-white mb-2">Moonlight at Golconda</h3>
+                        <p class="text-gray-200 mb-4">Special evening tours of the fort with sound & light show</p>
+                        <div class="flex items-center text-white">
+                            <span class="text-sm font-medium">From ₹8,200/person</span>
+                            <button class="ml-auto w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-hyderabad-saffron transition">
+                                <i class="fas fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-hyderabad-indigo text-hyderabad-indigo rounded-full font-semibold hover:bg-hyderabad-indigo hover:text-white transition">
+                    View All Hyderabad Experiences
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 gradient-bg relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center text-white mb-16">
+                <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 font-semibold text-sm mb-4">TRUSTED BY AGENTS</span>
+                <h2 class="text-4xl font-prata font-bold mb-4">What Our <span class="text-hyderabad-sand">Partners</span> Say</h2>
+                <p class="max-w-2xl mx-auto text-lg text-white/90">Hear from travel professionals who've elevated their Hyderabad offerings</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-8 border border-white/20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-hyderabad-sand">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Priya K." class="w-full h-full object-cover">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white">Priya K.</h4>
+                            <p class="text-sm text-white/70">Luxury Travel Consultant</p>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic">
+                        "The exclusive access to Hyderabad's heritage properties has transformed my luxury itineraries. My clients are consistently impressed."
+                    </p>
+                    <div class="mt-6 flex text-hyderabad-sand">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-8 border border-white/20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-hyderabad-sand">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rajiv M." class="w-full h-full object-cover">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white">Rajiv M.</h4>
+                            <p class="text-sm text-white/70">Corporate Travel Specialist</p>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic">
+                        "The group booking tools save me hours of work. I can now manage large corporate groups visiting Hyderabad with ease."
+                    </p>
+                    <div class="mt-6 flex text-hyderabad-sand">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-8 border border-white/20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-hyderabad-sand">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya S." class="w-full h-full object-cover">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white">Ananya S.</h4>
+                            <p class="text-sm text-white/70">Boutique Travel Designer</p>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic">
+                        "My clients love the authentic culinary experiences. The commission structure is the most competitive I've found in Hyderabad."
+                    </p>
+                    <div class="mt-6 flex text-hyderabad-sand">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                        <i class="fas fa-star ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="bg-gradient-to-r from-hyderabad-indigo to-hyderabad-teal rounded-3xl p-12 lg:p-16 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full"></div>
+                <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-hyderabad-saffron/20 rounded-full"></div>
+                <div class="relative z-10 text-center">
+                    <h2 class="text-3xl md:text-4xl font-prata font-bold text-white mb-6">
+                        Ready to transform your Hyderabad offerings?
+                    </h2>
+                    <p class="text-xl text-white/90 max-w-3xl mx-auto mb-10">
+                        Join our network of premium travel agents and get access to exclusive Hyderabad experiences.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="login.html" class="px-8 py-4 rounded-full bg-white text-hyderabad-indigo font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                            Agent Login <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#" class="px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold hover:bg-white hover:text-hyderabad-indigo transition">
+                            Request Demo <i class="fas fa-laptop ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-hyderabad-indigo text-white pt-20 pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="hyderabad-icon p-2 rounded-lg bg-gradient-to-br from-hyderabad-indigo to-hyderabad-teal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold font-prata">Hyderabad<span class="text-hyderabad-saffron">Tours</span></span>
+                    </div>
+                    <p class="text-white/80 mb-6 max-w-md">
+                        The premium booking platform for travel agents specializing in Hyderabad's rich culture, heritage, and luxury accommodations.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-hyderabad-saffron transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-hyderabad-saffron transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-hyderabad-saffron transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-hyderabad-saffron transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Tours</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Stays</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Transport</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Guides</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Experiences</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Company</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">About Us</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Agent Network</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Careers</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Contact</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-hyderabad-sand transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-white/60 text-sm">© 2023 Hyderabad Tours Agent Portal. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 flex space-x-6">
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition">Terms</a>
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition">Privacy</a>
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle (would need proper implementation)
+        document.querySelector('.lg\\:hidden button').addEventListener('click', function() {
+            alert("Mobile menu would open here in a full implementation");
+        });
+    </script>
+</body>
+</html>

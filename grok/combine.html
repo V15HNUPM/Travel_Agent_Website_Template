@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabad Tours | Authentication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Prata&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'prata': ['Prata', 'serif'],
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'hyderabad-saffron': '#FF6B35',
+                        'hyderabad-indigo': '#1E3A8A',
+                        'hyderabad-teal': '#06B6D4',
+                        'hyderabad-sand': '#F7C59F',
+                        'hyderabad-mint': '#A9D8B8',
+                    },
+                    animation: {
+                        'float': 'float 5s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(2deg)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 5px rgba(255, 107, 53, 0.3)' },
+                            'to': { boxShadow: '0 0 20px rgba(255, 107, 53, 0.7)' },
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1E3A8A 0%, #06B6D4 100%);
+        }
+        .auth-bg {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.7)), 
+                        url('https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glow-effect {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #FF6B35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+        }
+        .floating-shape {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 0;
+            animation: float 7s ease-in-out infinite;
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background: #FF6B35;
+            color: white;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-montserrat bg-gray-100 auth-bg min-h-screen flex items-center justify-center py-12 px-4">
+    <!-- Floating background elements -->
+    <div class="floating-shape top-10 left-5 w-72 h-72 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] bg-hyderabad-saffron mix-blend-multiply"></div>
+    <div class="floating-shape top-1/4 right-10 w-60 h-60 rounded-[70%_30%_30%_70%_/_70%_70%_30%_30%] bg-hyderabad-teal mix-blend-multiply" style="animation-delay: 2s;"></div>
+    <div class="floating-shape bottom-1/3 left-1/3 w-48 h-48 rounded-[30%_70%_70%_30%_/_70%_30%_70%_30%] bg-hyderabad-mint mix-blend-multiply" style="animation-delay: 4s;"></div>
+
+    <!-- Authentication Container -->
+    <div class="max-w-4xl w-full glass-effect rounded-3xl shadow-2xl p-8 md:p-12 relative z-10 reveal">
+        <div class="flex justify-center mb-8">
+            <div class="hyderabad-icon p-3 rounded-xl bg-gradient-to-br from-hyderabad-indigo to-hyderabad-teal">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <span class="text-3xl font-bold text-white font-prata ml-3">Hyderabad<span class="text-hyderabad-saffron">Tours</span></span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex justify-center mb-10">
+            <div class="flex space-x-2 bg-white/10 rounded-full p-1">
+                <button class="tab-button px-6 py-3 rounded-full text-white font-semibold text-lg active" onclick="showForm('login')">Login</button>
+                <button class="tab-button px-6 py-3 rounded-full text-white font-semibold text-lg" onclick="showForm('register')">Register</button>
+                <button class="tab-button px-6 py-3 rounded-full text-white font-semibold text-lg" onclick="showForm('forgot')">Forgot Password</button>
+            </div>
+        </div>
+
+        <!-- Forms -->
+        <div id="login-form" class="form-content">
+            <h2 class="text-3xl font-prata font-bold text-white text-center mb-8">Agent Login</h2>
+            <form>
+                <div class="mb-6">
+                    <label for="login-email" class="block text-white text-sm font-semibold mb-2">Email Address</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" id="login-email" placeholder="Enter your email" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                    </div>
+                </div>
+                <div class="mb-8">
+                    <label for="login-password" class="block text-white text-sm font-semibold mb-2">Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" id="login-password" placeholder="Enter your password" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                    </div>
+                </div>
+                <button type="submit" class="w-full px-8 py-4 rounded-full bg-gradient-to-r from-hyderabad-saffron to-orange-600 text-white font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 glow-effect">
+                    Sign In <i class="fas fa-arrow-right ml-3"></i>
+                </button>
+            </form>
+        </div>
+
+        <div id="register-form" class="form-content hidden">
+            <h2 class="text-3xl font-prata font-bold text-white text-center mb-8">Agent Registration</h2>
+            <form>
+                <!-- Personal Information -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-hyderabad-saffron mb-4">Personal Information</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="full-name" class="block text-white text-sm font-semibold mb-2">Full Name</label>
+                            <div class="relative">
+                                <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="full-name" placeholder="Enter your name" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="register-email" class="block text-white text-sm font-semibold mb-2">Email Address</label>
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="email" id="register-email" placeholder="Enter your email" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Details -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-hyderabad-saffron mb-4">Business Details</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="company-name" class="block text-white text-sm font-semibold mb-2">Company Name</label>
+                            <div class="relative">
+                                <i class="fas fa-building absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="company-name" placeholder="Enter company name" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="gst-number" class="block text-white text-sm font-semibold mb-2">GST Number</label>
+                            <div class="relative">
+                                <i class="fas fa-file-invoice absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="gst-number" placeholder="Enter GST number" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-hyderabad-saffron mb-4">Contact Information</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="mobile-number" class="block text-white text-sm font-semibold mb-2">Mobile Number</label>
+                            <div class="relative">
+                                <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="tel" id="mobile-number" placeholder="Enter mobile number" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="alternate-mobile" class="block text-white text-sm font-semibold mb-2">Alternate Mobile</label>
+                            <div class="relative">
+                                <i class="fas fa-phone-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="tel" id="alternate-mobile" placeholder="Enter alternate number" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Details -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-hyderabad-saffron mb-4">Address Details</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="area" class="block text-white text-sm font-semibold mb-2">Area</label>
+                            <div class="relative">
+                                <i class="fas fa-map-marker-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="area" placeholder="Enter your area" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="state" class="block text-white text-sm font-semibold mb-2">State</label>
+                            <div class="relative">
+                                <i class="fas fa-globe absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="state" placeholder="Enter your state" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <label for="full-address" class="block text-white text-sm font-semibold mb-2">Full Address</label>
+                        <div class="relative">
+                            <i class="fas fa-home absolute left-4 top-4 text-gray-400"></i>
+                            <textarea id="full-address" placeholder="Enter your complete address" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none h-32 resize-none" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-hyderabad-saffron mb-4">Security</h3>
+                    <div>
+                        <label for="register-password" class="block text-white text-sm font-semibold mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="password" id="register-password" placeholder="Enter your password" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full px-8 py-4 rounded-full bg-gradient-to-r from-hyderabad-saffron to-orange-600 text-white font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 glow-effect">
+                    Register Now <i class="fas fa-user-plus ml-3"></i>
+                </button>
+            </form>
+        </div>
+
+        <div id="forgot-form" class="form-content hidden">
+            <h2 class="text-3xl font-prata font-bold text-white text-center mb-8">Reset Password</h2>
+            <form>
+                <div class="mb-8">
+                    <label for="forgot-email" class="block text-white text-sm font-semibold mb-2">Email Address</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" id="forgot-email" placeholder="Enter your email" class="input-field w-full pl-12 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none" required>
+                    </div>
+                </div>
+                <button type="submit" class="w-full px-8 py-4 rounded-full bg-gradient-to-r from-hyderabad-saffron to-orange-600 text-white font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 glow-effect">
+                    Send Reset Link <i class="fas fa-envelope ml-3"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showForm(formId) {
+            document.querySelectorAll('.form-content').forEach(form => form.classList.add('hidden'));
+            document.getElementById(`${formId}-form`).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`button[onclick="showForm('${formId}')"]`).classList.add('active');
+        }
+
+        // Initial reveal animation
+        window.addEventListener('load', () => {
+            document.querySelector('.reveal').classList.add('active');
+        });
+    </script>
+</body>
+</html>
